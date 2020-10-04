@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+.image-edit{
+    width: 80px;
+    margin-bottom: 10px;
+}
+.image-mask{
+    width: 40px;
+    height:40px;
+    overflow:hidden;
+    border-radius: 900px;
+}
+.image-nav{
+    width: 40px;
+    height:40px;
+}

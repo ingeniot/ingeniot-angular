@@ -1,7 +1,8 @@
 <div class="col-md-12 mt-3">
     <h1>{{page_title}}</h1>
-    <p *ngIf="status !='success'">Registrate!</p>
-
+    <p *ngIf="status !='success'">Actualizar tus datos!</p>
+    <hr>
+    <!--
     <div class="alert alert-success col-md-4" *ngIf="status=='success'">
         El registro se ha completado correctamente, <a [routerLink]="['/login']">Logueate</a>
 
@@ -9,9 +10,10 @@
     <div class="alert alert-danger col-md-4" *ngIf="status=='error'">
         El registro no se ha completado correctamente, vuelva a intentarlo
 
-    </div>
+    </div>>
+-->
     <!--Inicio formulario-->
-    <form class="col-md-4 ml-0 pl-0" action="" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+    <form class="col-md-4 ml-0 pl-0" action="" #userEditForm="ngForm" (ngSubmit)="onSubmit(userEditForm)">
         <div class="form-group">
             <label for="name">Nombre</label>
             <input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="user.name" required
@@ -32,14 +34,30 @@
             <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">El correo no es válido</small>
         </div>
         <div class="form-group">
-            <label for="password">Clave</label>
-            <input type="password" name="password" class="form-control" #password="ngModel" [(ngModel)]="user.password"
-                required>
-            <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">La clave no es
-                válida</small>
-        </div>
+            <label for="name">Descripción</label>
+            <input type="text" name="description" class="form-control" #name="ngModel" [(ngModel)]="user.description">
 
-        <input type="submit" value="Registrarse" class="btn btn-success" [disabled]="registerForm.invalid" />
+        </div>
+        <div class="form-group">
+            <label for="image">Imagen</label>
+            <div *ngIf="identity && identity.image">
+            <img src="{{url+'user/avatar/'+identity.image}}" class="image-edit"/>
+        </div>           
+            <angular-file-uploader 
+            [config]="afuConfig"
+            [resetUpload]=resetVar 
+            (ApiResponse)="imageUpload($event)">
+            </angular-file-uploader>
+                   <!-- <div *ngIf="identity && identity.image">
+            <img src="{{url+'user/avatar/'+identity.image}}">
+</div>
+            <angular-file-uploader 
+            [config]="afuConfig" 
+            [resetUpload]=resetVar 
+            (ApiResponse)="imageUpload($event)">
+            </angular-file-uploader>-->
+        </div>
+        <input type="submit" value="Modificar" class="btn btn-success" [disabled]="userEditForm.invalid" />
 
     </form>
     <!--Fin formulario-->

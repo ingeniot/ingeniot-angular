@@ -21,10 +21,9 @@ export class UserService {
 
     register(user): Observable<any> {
         let json = JSON.stringify(user);
-        let values = 'json=' + json;
+        let params = 'json=' + json;
         let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-        return this._http.post(this.url + 'register', values, { headers: headers });
-
+        return this._http.post(this.url + 'register', params, { headers: headers });
     }
 
     login(user, getToken = null): Observable<any> {
@@ -32,9 +31,19 @@ export class UserService {
             user.getToken = true;
         }
         let json = JSON.stringify(user);
-        let values = 'json=' + json;
+        let params = 'json=' + json;
         let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-        return this._http.post(this.url + 'login', values, { headers: headers });
+        return this._http.post(this.url + 'login', params, { headers: headers });
+    }
+
+    update( user: User, token): Observable<any>{
+        let json = JSON.stringify(user);
+        let params = "json="+json;
+        console.log('params = '+params);
+        console.log('token = '+token);       
+        let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+                                    .set('Authorization',token);
+        return this._http.put(this.url + 'user/update', params, {headers:headers});
     }
 
     getIdentity() {
@@ -49,7 +58,7 @@ export class UserService {
 
 
     getToken() {
-        let token = JSON.parse(localStorage.getItem('token'));
+        let token = localStorage.getItem('token');
         if (token && token != "undefined") {
             this.token = token;
         } else {

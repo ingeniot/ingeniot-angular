@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { AngularFileUploaderModule } from "angular-file-uploader";
 //import { routing, appRoutingProviders } from './app.routing';
 
 import { AppComponent } from './app.component';
@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { ErrorComponent } from './components/error/error.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ErrorComponent } from './components/error/error.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ErrorComponent,    
+    ErrorComponent,
+    UserEditComponent,    
     //routing
   ],
   imports: [
@@ -28,12 +30,14 @@ import { ErrorComponent } from './components/error/error.component';
         {path: 'inicio', component: HomeComponent},
         {path: 'registro', component: RegisterComponent},
         {path: 'login', component: LoginComponent},
-        {path: 'logout/:sure', component: LoginComponent},        
+        {path: 'logout/:sure', component: LoginComponent},     
+        {path: 'ajustes', component: UserEditComponent},  
         {path: '**', component: ErrorComponent},
 
       ]),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFileUploaderModule
     ],
 
   providers: [

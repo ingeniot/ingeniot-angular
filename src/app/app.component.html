@@ -2,30 +2,31 @@
 <div class="container">
   <!--inicio barra de navegación-->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">
-    
-    <img src="assets/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-    IngenIoT</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="'/inicio'">Inicio<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Servicios</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Productos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Contacto</a>
-      </li>
-    </ul>   
+      <img src="assets/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      IngenIoT</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="'/inicio'">Inicio<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Servicios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contacto</a>
+        </li>
+      </ul>
 
       <ul class="navbar-nav navbar-right" *ngIf="!identity">
         <li class="nav-item active">
@@ -34,28 +35,34 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/registro']">Registro</a>
         </li>
-  </ul>
+      </ul>
 
-    <ul class="navbar-nav navbar-right"  *ngIf="identity && identity.name">
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{identity.name+' '+identity.surname}}
-      </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#">Notificaciones</a>
-        <a class="dropdown-item" href="#">Perfil</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" [routerLink]="['logout/1']">Salir</a>
-      </div>
-    </li>
+      <ul class="navbar-nav navbar-right" *ngIf="identity && identity.name">
+        <li *ngIf="identity && identity.image" class = "nav-item">
+          <div class = "image-mask">
+          <img src="{{url+'user/avatar/'+identity.image}}" class="image-nav"/>
+        </div>
+        </li>  
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{identity.name+' '+identity.surname}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Notificaciones</a>
+            <a class="dropdown-item" href="#">Perfil</a>
+            <a class="dropdown-item" [routerLink]="['/ajustes']">Ajustes</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" [routerLink]="['/logout/1']">Salir</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!--fin barra de navergación-->
+  <!--inicio contenido-->
+  <router-outlet></router-outlet>
 
-  </ul>
-  </div>
-</nav>
-<!--fin barra de navergación-->
-<!--inicio contenido-->
-<router-outlet></router-outlet>
-
-<!--fin contenido-->
+  <!--fin contenido-->
 </div>
 <!--fin contenedor principal-->
